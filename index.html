@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avila Cucina Italiana | O Sabor Autêntico da Itália</title>
+    <!-- Carrega Tailwind CSS para estilização moderna e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carrega Font Awesome para ícones de redes sociais e contato -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Configuração de fontes personalizadas -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        /* Variáveis de Cor para Visual Luxuoso Italiano (Verde e Vermelho Profundos) */
+        :root {
+            --color-main: #386641; /* Verde Floresta Profundo (Destaque Principal) */
+            --color-accent: #A41623; /* Carmesim/Vermelho Italiano Profundo (Detalhes de Luxo) */
+            --color-text-dark: #2C2C2C; /* Carvão (Cor do texto) */
+            --color-bg-light: #FAF9F6; /* Off-White Cremoso (Fundo Elegante) */
+            --color-whatsapp: #25D366; /* Verde WhatsApp Padrão (Funcional) */
+        }
+
+        /* Estilos globais e tipografia */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--color-text-dark);
+            background-color: var(--color-bg-light);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .playfair-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Classes de utilidade customizadas para cores do tema */
+        .bg-main { background-color: var(--color-main); }
+        .text-main { color: var(--color-main); }
+        .border-main { border-color: var(--color-main); }
+
+        .bg-accent { background-color: var(--color-accent); }
+        .text-accent { color: var(--color-accent); }
+        .border-accent { border-color: var(--color-accent); }
+        
+        .bg-whatsapp { background-color: var(--color-whatsapp); }
+        .text-whatsapp { color: var(--color-whatsapp); }
+
+        /* Estilo do botão primário (Agora Verde Profundo) para o Hero */
+        .btn-primary-luxury {
+            @apply inline-block px-10 py-4 text-xl font-bold rounded-lg shadow-2xl transition duration-300 transform hover:scale-[1.03] uppercase;
+            background-color: var(--color-main); /* Verde Profundo */
+            color: var(--color-bg-light); /* Creme */
+            letter-spacing: 1px;
+        }
+
+        /* Estilo do botão secundário/WhatsApp (Mais sofisticado) */
+        .btn-whatsapp-luxury {
+            @apply inline-block px-8 py-4 text-lg font-semibold rounded-lg shadow-xl transition duration-300 transform hover:opacity-90;
+            background-color: var(--color-whatsapp);
+            color: var(--color-bg-light);
+        }
+
+        /* Estilo para animações de hover em cards e elementos interativos */
+        .hover-effect {
+            transition: all 0.3s ease;
+        }
+        .hover-effect:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Sombra mais profunda */
+            transform: translateY(-8px);
+        }
+
+        /* Hero Section com Parallax e Text Shadow */
+        #hero {
+            background-image: url('https://i.imgur.com/yBq74m2.jpeg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efeito Parallax */
+        }
+        
+        /* Estilo para o cabeçalho fixo */
+        #header {
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Sombra no texto do Hero para destaque */
+        .hero-title-shadow {
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8); /* Sombra mais forte */
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Topo (Header) -->
+    <header id="header" class="fixed top-0 left-0 w-full z-50 bg-white/90 shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center backdrop-blur-sm">
+            <!-- Logo - ATUALIZADO: Usando o link direto do Imgur -->
+            <a href="#inicio" class="flex items-center">
+                <img src="https://i.imgur.com/NeCyvke.png" alt="Logo Avila Cucina Italiana" class="h-10 sm:h-14 w-auto">
+            </a>
+
+            <!-- Menu de Navegação (Desktop) -->
+            <nav class="hidden md:flex space-x-10">
+                <a href="#inicio" class="text-gray-600 hover:text-main font-semibold transition duration-300 playfair-display text-lg tracking-wider">Início</a>
+                <a href="#cardapio" class="text-gray-600 hover:text-main font-semibold transition duration-300 playfair-display text-lg tracking-wider">Cardápio</a>
+                <a href="#historia" class="text-gray-600 hover:text-main font-semibold transition duration-300 playfair-display text-lg tracking-wider">Nossa História</a>
+                <a href="#contato" class="text-gray-600 hover:text-main font-semibold transition duration-300 playfair-display text-lg tracking-wider">Contato</a>
+            </nav>
+
+            <!-- Menu Hamburguer (Mobile) -->
+            <button id="menu-btn" class="md:hidden text-main focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Menu Mobile (oculto por padrão) -->
+        <nav id="menu-mobile" class="hidden md:hidden bg-white/95 backdrop-blur-sm shadow-xl">
+            <a href="#inicio" class="block py-4 px-6 text-gray-700 hover:bg-main hover:text-white transition duration-300 border-t border-gray-100" onclick="toggleMenu()">Início</a>
+            <a href="#cardapio" class="block py-4 px-6 text-gray-700 hover:bg-main hover:text-white transition duration-300 border-t border-gray-100" onclick="toggleMenu()">Cardápio</a>
+            <a href="#historia" class="block py-4 px-6 text-gray-700 hover:bg-main hover:text-white transition duration-300 border-t border-gray-100" onclick="toggleMenu()">Nossa História</a>
+            <a href="#contato" class="block py-4 px-6 text-gray-700 hover:bg-main hover:text-white transition duration-300 border-t border-gray-100" onclick="toggleMenu()">Contato</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 2. Seção Principal (Hero Section) - MAIS LUXUOSA E IMPONENTE -->
+        <section id="inicio" class="min-h-screen flex items-center justify-center text-center pt-[80px] lg:pt-0" aria-label="Seção de Boas-vindas">
+            <div id="hero" class="absolute inset-0">
+                <!-- Overlay mais escuro (bg-black/70) para maior contraste e luxo -->
+                <div class="absolute inset-0 bg-black/70"></div> 
+            </div>
+            
+            <div class="relative z-10 p-6 md:p-16 max-w-5xl">
+                
+                <!-- Separador Decorativo Superior -->
+                <div class="w-1/3 md:w-1/4 mx-auto mb-8">
+                    <div class="h-1 bg-accent mb-1 rounded-full"></div>
+                    <div class="h-0.5 bg-main rounded-full"></div>
+                </div>
+
+                <h1 class="text-7xl md:text-9xl playfair-display font-black text-white mb-6 leading-tight hero-title-shadow animate-fade-in">
+                    Avila Cucina Italiana
+                </h1>
+                
+                <!-- Subtítulo agora com mais destaque -->
+                <p class="text-2xl md:text-4xl text-white mb-8 font-medium italic hero-title-shadow opacity-95">
+                    O sabor autêntico da Itália em cada pedaço.
+                </p>
+
+                <!-- Separador Decorativo Inferior -->
+                <div class="w-1/3 md:w-1/4 mx-auto mb-16">
+                    <div class="h-0.5 bg-main mb-1 rounded-full"></div>
+                    <div class="h-1 bg-accent rounded-full"></div>
+                </div>
+                
+                <!-- Botão Primário agora em Verde Profundo (Cor Principal) -->
+                <a href="#cardapio" class="btn-primary-luxury">
+                    Conheça nosso cardápio
+                </a>
+            </div>
+        </section>
+
+        <!-- 3. Seção "Nossa História" - Detalhes refinados -->
+        <section id="historia" class="py-20 md:py-32 bg-bg-light" aria-label="Nossa História e Origem">
+            <div class="container mx-auto px-6 max-w-7xl">
+                <div class="flex flex-col md:flex-row items-center gap-16">
+                    <!-- Imagem da História (Esquerda) -->
+                    <div class="md:w-1/2">
+                        <img src="https://i.imgur.com/TWLbNbD.jpeg" alt="Foto de uma pizza coberta de queijo" 
+                             class="w-full h-auto object-cover rounded-lg shadow-2xl transform transition duration-500 hover:scale-[1.02]">
+                    </div>
+
+                    <!-- Texto da História (Direita) -->
+                    <div class="md:w-1/2">
+                        <h2 class="text-5xl md:text-6xl playfair-display font-bold mb-8 text-main border-b-2 border-accent inline-block pb-3">
+                            Nossa História
+                        </h2>
+                        <!-- TEXTO MANTIDO -->
+                        <p class="text-xl leading-relaxed mb-6 text-text-dark font-light">
+                            Nossa família da parte materna sempre foi cercada de pessoas que amavam cozinhar e fazer maravilhas na cozinha, entre pizzas, salgados, doces, etc. Era uma festa quando reuniam a família e amigos, e esse dom e talento foram passados de geração em geração, e aí veio a ideia de <strong>AVILA CUCINA ITALIANA</strong> em homenagem ao sobrenome da avó materna do meu filho Lucas.
+                        </p>
+                        <p class="text-xl leading-relaxed text-text-dark font-light">
+                            Sou uma das filhas que sempre teve paixão por cozinhar e meu filho Lucas herdou esse talento e começou a despertar esse gosto pela cozinha desde pequeno. Ele sempre gostou de me ajudar na cozinha e com o tempo fazia suas invenções, desde pratos, doces e salgados, e essa paixão só aumentou. Neste ano de 2025, ele resolveu fazer faculdade de gastronomia. Um belo dia, conversando com a gente (os pais), ele disse que teria vontade de montar um negócio como uma pizzaria. Nós sugerimos de começar com pizza SEMI-PRONTA em casa, que é algo que todos gostam e podem levar para suas casas. Essa é uma pequena parte da nossa história... <strong>UM GRANDE ABRAÇO DA NOSSA FAMÍLIA PARA A SUA!</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Seção “Cardápio” - Cards mais elegantes com Verde e Carmesim -->
+        <section id="cardapio" class="py-20 md:py-32 bg-gray-100" aria-label="Nosso Cardápio de Pizzas">
+            <div class="container mx-auto px-6 max-w-7xl">
+                <h2 class="text-6xl playfair-display font-bold text-center mb-6 text-main">
+                    Nosso Cardápio
+                </h2>
+                <p class="text-center text-2xl text-text-light mb-16 font-light">
+                    Descubra os sabores das PIZZAS SEMI-PRONTAS que preparamos com a tradição da culinária italiana.
+                </p>
+
+                <!-- Container de Cards do Cardápio -->
+                <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Data do Cardápio (JSON formatado como string para fácil iteração em JS) -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- 5. Seção “Contato” - REFORMULADA PARA LUXO E ELEGÂNCIA (Dias de atendimento removidos) -->
+        <section id="contato" class="py-20 md:py-32 bg-bg-light" aria-label="Fale Conosco e Localização">
+            <div class="container mx-auto px-6 max-w-7xl">
+                <h2 class="text-6xl playfair-display font-bold text-center mb-6 text-main">
+                    Fale Conosco
+                </h2>
+
+                <div class="flex flex-col lg:flex-row gap-10">
+                    <!-- Informações de Contato e Botão - ENHANCED CARD -->
+                    <div class="lg:w-1/2 p-8 md:p-12 bg-white rounded-2xl shadow-2xl border-l-8 border-accent">
+                        
+                        <!-- TEXTO: WhatsApp sem os asteriscos (apenas negrito) -->
+                        <p class="text-2xl font-light mb-10 leading-relaxed text-text-dark">
+                            Faça seu pedido ou tire suas dúvidas diretamente pelo WhatsApp! Nosso atendimento é rápido e personalizado.
+                        </p>
+                        <!-- Botão WhatsApp - Estilo Luxuoso, mas funcional -->
+                        <a href="https://wa.me/12997252512" target="_blank" 
+                           class="btn-whatsapp-luxury bg-whatsapp text-white text-center flex items-center justify-center w-full max-w-sm hover:shadow-2xl">
+                            <i class="fab fa-whatsapp text-2xl mr-3"></i> Pedir pelo WhatsApp
+                        </a>
+
+                        <!-- Informações Adicionais -->
+                        <div class="mt-12 space-y-5">
+                            <h3 class="text-3xl playfair-display font-semibold mb-6 text-main border-b border-gray-200 pb-2">Detalhes</h3>
+                            <div class="flex items-start text-xl text-text-dark">
+                                <i class="fas fa-phone-alt text-accent mr-4 mt-1"></i>
+                                <p>Telefone: (12) 99725-2512</p>
+                            </div>
+                            <!-- Apenas Horário, sem os dias -->
+                            <div class="flex items-start text-xl text-text-dark">
+                                <i class="fas fa-clock text-accent mr-4 mt-1"></i>
+                                <p>Horário de Atendimento:</p>
+                            </div>
+                            <div class="flex items-start text-xl text-text-dark">
+                                <i class="fas fa-map-marker-alt text-accent mr-4 mt-1"></i>
+                                <p>Localização: Guaratinguetá/SP</p>
+                            </div>
+                        </div>
+
+                        <!-- Redes Sociais - VISUAL MELHORADO -->
+                        <div class="mt-12">
+                            <h3 class="text-3xl playfair-display font-semibold mb-4 text-main">Siga-nos nas redes:</h3>
+                            <div class="flex space-x-6">
+                                <!-- Ícones na cor principal com hover de destaque -->
+                                <a href="https://wa.me/12997252512" target="_blank" aria-label="WhatsApp" 
+                                   class="text-4xl text-main hover:text-whatsapp transition duration-300 transform hover:scale-110">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                <a href="https://www.instagram.com/avilacucina" target="_blank" aria-label="Instagram" 
+                                   class="text-4xl text-main hover:text-pink-600 transition duration-300 transform hover:scale-110">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.facebook.com/people/Avila-Cucina/pfbid0ZRVnidViiWeHsM1X8no4vVkRx1y36CMQuftUYmV69Bxgi8jE6QhB3Bo4LGUD2A5l/?rdid=stQAW6x7AW2ZarSZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1ghGVSuR8P%2F" target="_blank" aria-label="Facebook" 
+                                   class="text-4xl text-main hover:text-blue-600 transition duration-300 transform hover:scale-110">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mapa Incorporado -->
+                    <div class="lg:w-1/2 rounded-2xl overflow-hidden shadow-2xl hover-effect">
+                        <h3 class="sr-only">Localização (Guaratinguetá/SP)</h3>
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117544.755490656!2d-45.28945722421303!3d-22.809311228498835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ccf67c13a05c31%3A0x6a1202e8633c706c!2sGuaratinguet%C3%A1%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
+                            width="100%" 
+                            height="500" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Mapa de localização em Guaratinguetá/SP">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 6. Rodapé (Footer) - Mais escuro e elegante -->
+    <footer class="bg-gray-950 text-white py-14" aria-label="Rodapé do Site">
+        <div class="container mx-auto px-6 text-center">
+            <!-- Logo no Rodapé - ATUALIZADO: Usando o link direto do Imgur -->
+            <img src="https://i.imgur.com/NeCyvke.png" alt="Logo Avila Cucina Italiana" class="h-20 w-auto mx-auto mb-8 opacity-90">
+
+            <!-- Redes Sociais no Rodapé -->
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="https://wa.me/12997252512" target="_blank" aria-label="WhatsApp" class="text-3xl text-whatsapp hover:text-white transition duration-300">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/avilacucina" target="_blank" aria-label="Instagram" class="text-3xl text-pink-600 hover:text-white transition duration-300">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/people/Avila-Cucina/pfbid0ZRVnidViiWeHsM1X8no4vVkRx1y36CMQuftUYmV69Bxgi8jE6QhB3Bo4LGUD2A5l/?rdid=stQAW6x7AW2ZarSZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1ghGVSuR8P%2F" target="_blank" aria-label="Facebook" class="text-3xl text-blue-500 hover:text-white transition duration-300">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </div>
+
+            <!-- Direitos Autorais -->
+            <p class="text-base text-gray-400">
+                © 2025 Avila Cucina Italiana — Todos os direitos reservados.
+                <span class="block mt-2">Feito com paixão e tradição.</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript para a Interatividade -->
+    <script>
+        // Dados do cardápio para renderização dinâmica
+        const cardapioData = [
+            { nome: "Moda da Casa", preco: "R$40,00", descricao: "Frango, molho de tomate, milho, bacon, mussarela, catupiry" },
+            { nome: "Lombinho", preco: "R$32,00", descricao: "Mussarela, molho de tomate, lombo" },
+            { nome: "Calabresa", preco: "R$32,00", descricao: "Molho de tomate, mussarela, calabresa (cebola opcional)" },
+            { nome: "Frango com Catupiry", preco: "R$38,00", descricao: "Frango, molho de tomate, mussarela, catupiry" },
+            { nome: "Frango", preco: "R$36,00", descricao: "Frango, molho de tomate, mussarela" },
+            { nome: "Mussarela", preco: "R$28,00", descricao: "Mussarela, molho de tomate, tomate" },
+            { nome: "Milho", preco: "R$30,00", descricao: "Mussarela, molho de tomate, milho" },
+            { nome: "Milho com Catupiry", preco: "R$34,00", descricao: "Mussarela, molho de tomate, milho, catupiry" },
+            { nome: "Palmito", preco: "R$36,00", descricao: "Mussarela, molho de tomate, palmito" },
+            { nome: "Palmito com Catupiry", preco: "R$38,00", descricao: "Mussarela, molho de tomate, palmito, catupiry" },
+            { nome: "Portuguesa", preco: "R$40,00", descricao: "Mussarela, molho de tomate, presunto, milho, palmito, ovo" },
+            { nome: "Brócolis", preco: "R$32,00", descricao: "Mussarela, molho de tomate, brócolis" },
+            { nome: "Brócolis com Bacon", preco: "R$38,00", descricao: "Mussarela, molho de tomate, brócolis, bacon, catupiry" },
+            { nome: "Presunto", preco: "R$32,00", descricao: "Mussarela, molho de tomate, presunto" },
+            { nome: "Atum", preco: "R$42,00", descricao: "Mussarela, molho de tomate, atum" }
+        ];
+
+        // Função para alternar o menu mobile
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('menu-mobile');
+        
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+            // Altera o ícone do menu (hamburguer <-> X)
+            const icon = menuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        }
+        
+        menuBtn.addEventListener('click', toggleMenu);
+
+
+        // Renderiza dinamicamente os cards do cardápio
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuGrid = document.getElementById('menu-grid');
+            const whatsappLink = 'https://wa.me/12997252512';
+
+            const cardapioHTML = cardapioData.map(item => `
+                <div class="bg-white p-8 rounded-2xl shadow-xl hover-effect border-t-4 border-accent">
+                    <h3 class="text-3xl playfair-display font-bold text-main mb-3">${item.nome}</h3>
+                    <p class="text-2xl font-black text-accent mb-4">${item.preco}</p>
+                    <p class="text-gray-700 mb-8 text-base font-light">${item.descricao}</p>
+                    <a href="${whatsappLink}" target="_blank" class="w-full bg-main text-white py-3 rounded-lg text-center font-semibold text-base transition duration-300 hover:bg-opacity-90 shadow-lg">
+                        <i class="fab fa-whatsapp mr-2"></i> Fazer Pedido
+                    </a>
+                </div>
+            `).join('');
+
+            if (menuGrid) {
+                menuGrid.innerHTML = cardapioHTML;
+            }
+        });
+
+        // Efeito de sombra no header ao rolar a página
+        window.onscroll = function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-xl', 'bg-white/95');
+                header.classList.remove('bg-white/90');
+            } else {
+                header.classList.remove('shadow-xl', 'bg-white/95');
+                header.classList.add('bg-white/90');
+            }
+        };
+
+        // Previne a classe 'hidden' de permanecer em telas maiores após o redimensionamento
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768 && !mobileMenu.classList.contains('hidden')) {
+                toggleMenu(); // Oculta o menu mobile se a tela for desktop e ele estiver aberto
+            }
+        });
+    </script>
+
+</body>
+</html>
